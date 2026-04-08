@@ -399,7 +399,7 @@ Aturan Penulisan:
 3. 'latar', 'tugas', 'tujuan': Harus mencerminkan kondisi pertanian wilayah setempat dan tupoksi Penyuluh Pertanian sesuai PERMENPAN (perencanaan, pelaksanaan, evaluasi, dan pengembangan metode penyuluhan).
 4. 'items': Iterasi seluruh data. 'rincian' maksimal 1 kalimat efektif. Jika 'user_kendala' kosong/null, buat kendala teknis lapangan yang relevan secara logis. 'tindak' harus berupa solusi profesional dengan maksimal 2 kalimat efektif.
 5. 'kesimp' (Kesimpulan):
-- Wajib terdiri dari 3 paragraf TERPISAH.
+- Wajib terdiri dari 2 paragraf TERPISAH.
 - Gunakan bahasa Indonesia formal, baku, dan naratif seperti laporan resmi pemerintah.
 
 Struktur isi:
@@ -407,10 +407,7 @@ Struktur isi:
   Menjelaskan secara umum capaian kinerja penyuluh berdasarkan kegiatan yang telah dilaksanakan, termasuk kontribusi terhadap peningkatan produksi, pendampingan petani, dan dukungan terhadap program Kementerian Pertanian.
 
 - Paragraf 2 (Evaluasi Kendala):
-  Menguraikan kendala yang dihadapi di lapangan (teknis, cuaca, sarana prasarana, partisipasi petani, dll) serta dampaknya terhadap pelaksanaan kegiatan.
-
-- Paragraf 3 (Rekomendasi/Harapan):
-  Berisi langkah perbaikan, strategi ke depan, serta harapan terhadap dukungan pemerintah,
+  Menguraikan kendala yang dihadapi di lapangan (teknis, cuaca, sarana prasarana, partisipasi petani, dll) serta dampaknya terhadap pelaksanaan kegiatan, strategi ke depan, serta harapan terhadap dukungan pemerintah,
 
 PENTING: Output wajib JSON murni tanpa teks pengantar apapun di luar bracket:
 {"kp":"", "latar":"", "tugas":"", "tujuan":"", "kesimp":"", "items":[{"no":1, "rincian":"", "kendala":"", "tindak":""}]}`;
