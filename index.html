@@ -66,17 +66,28 @@
     </style>
 </head>
 <body>
-<div id="browser-warning" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm no-print">
-    <div class="bg-slate-800 p-8 rounded-2xl border-2 border-emerald-500 max-w-sm w-full mx-4 text-center shadow-2xl">
-        <div class="text-emerald-400 text-5xl mb-4">
+<div id="browser-warning" class="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/90 backdrop-blur-md no-print p-4">
+    <div class="bg-slate-800 p-6 sm:p-8 rounded-3xl border border-emerald-500/50 max-w-sm w-full text-center shadow-2xl ring-1 ring-white/10">
+        
+        <div class="text-emerald-400 text-5xl mb-4 animate-bounce-slow">
             <i class="fa-solid fa-circle-exclamation"></i>
         </div>
-        <h3 class="text-xl font-bold text-white mb-2">Informasi Penggunaan</h3>
-        <p class="text-slate-300 mb-6 text-sm">
-            Untuk hasil cetak laporan yang optimal, gunakan <b>HP Android</b> atau <b>Desktop/Laptop</b> dengan browser <b>Google Chrome</b>.<br><b>Generating AI kadang gagal</b> karena padatnya pengguna.</br><br>Coba generating ulang beberapa saat, tak perlu refresh atau tutup tab.</br>
-        </p>
-        <button onclick="closeWarning()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition duration-300">
-            Saya Mengerti
+        
+        <h3 class="text-xl font-bold text-white mb-3">Informasi Penggunaan</h3>
+        
+        <div class="text-slate-300 mb-8 text-sm leading-relaxed space-y-3">
+            <p>
+                Untuk hasil cetak laporan yang optimal, gunakan <b>HP Android</b> atau <b>Laptop</b> dengan browser <b>Google Chrome</b>.
+            </p>
+            <p class="bg-emerald-500/10 p-4 rounded-xl border border-emerald-500/30 text-sm md:text-base text-emerald-50">
+    <i class="fa-solid fa-robot mr-2 text-emerald-400"></i> 
+    <b class="text-white">Generating AI</b> kadang gagal karena padatnya trafik. 
+    Coba lagi beberapa saat, <b>jangan</b> <i>refresh</i> halaman.
+</p>
+        </div>
+        
+        <button onclick="closeWarning()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-2xl transition-all duration-300 active:scale-95 shadow-lg shadow-emerald-900/20">
+            SAYA MENGERTI
         </button>
     </div>
 </div>
