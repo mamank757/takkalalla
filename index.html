@@ -320,7 +320,7 @@
                 <div class="input-card" id="card_${no}">
                     <div class="flex items-start gap-3 mb-2">
                         <input type="checkbox" id="chk_${no}" onchange="toggle(${no})" class="w-5 h-5 mt-1">
-                        <label for="chk_${no}" class="font-bold text-sm text-slate-200 cursor-pointer">${no}. ${k}</label>
+                        <label for="chk_${no}" class="font-normal text-sm text-slate-200 cursor-pointer">${no}. ${k}</label>
                     </div>
                     <div id="box_${no}" class="hidden-input space-y-2">
                         <textarea id="key_${no}" placeholder="Detail aktivitas, objek/komoditi diperjelas: Cth. Monitoring luas tambah tanam padi Poktan Sukamaju"></textarea>
@@ -347,7 +347,7 @@
         daftarKomponen.forEach((k, i) => {
             const no = i + 1;
             if(document.getElementById(`chk_${no}`).checked) {
-                tb.innerHTML += `<tr><td align="center">${c++}</td><td class="font-bold">${k}</td><td id="r_${no}">...</td><td id="k_${no}" align="center">-</td><td id="t_${no}" align="center">-</td></tr>`;
+                tb.innerHTML += `<tr><td align="center">${c++}</td><td class="font-normal">${k}</td><td id="r_${no}">...</td><td id="k_${no}" align="center">-</td><td id="t_${no}" align="center">-</td></tr>`;
             }
         });
     }
