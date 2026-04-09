@@ -49,7 +49,26 @@
         input, select { width: 100%; background: #0f172a; border: 1px solid #475569; color: white; padding: 8px; border-radius: 6px; margin-top: 8px; }
         .hidden-input { display: none; }
 
-        .sig-container { display: inline-block; min-width: 250px; text-align: center; }
+       /* Container dibuat relative agar posisi absolute gambar mengacu ke sini */
+.sig-container { 
+    display: inline-block; 
+    min-width: 250px; 
+    text-align: center; 
+    position: relative; /* Penting! */
+    margin-top: 10px;
+}
+
+.img-ttd { 
+    position: absolute; /* Membuat gambar bisa melayang di atas teks */
+    left: 50%;
+    bottom: -5px; /* Jarak dari bawah (atur agar menyentuh nama) */
+    transform: translateX(-50%); /* Agar posisi horizontal tepat di tengah */
+    max-height: 120px; /* Ukuran diperbesar dari 80px ke 120px */
+    width: auto;
+    z-index: 10; /* Memastikan gambar berada di lapisan paling atas */
+    pointer-events: none; /* Agar tidak mengganggu klik pada teks jika perlu */
+    mix-blend-mode: multiply; /* Membuat background putih pada TTD jadi transparan */
+}
 
         @media print {
             @page { size: A4; margin: 0; }
@@ -145,8 +164,11 @@
                     <option value="DESEMBER">Desember</option>
                 </select>
 
-                <label class="text-xs font-bold text-slate-400 uppercase -mb-2">Tanggal Laporan (TTD)</label>
+                 <label class="text-xs font-bold text-slate-400 uppercase -mb-2">Tanggal Laporan (TTD)</label>
                 <input type="date" id="in_tanggal" oninput="sync()">
+
+                <label class="text-xs font-bold text-emerald-400 uppercase -mb-2 mt-2">Upload Tanda Tangan (PNG)</label>
+                <input type="file" id="in_ttd" accept="image/*" onchange="handleTTD(this)" class="text-xs file:bg-emerald-600 file:border-none file:text-white file:rounded file:px-2 file:py-1">
                 
                 <button onclick="generateAI()" id="btn-ai" class="mt-4 w-full bg-indigo-600 hover:bg-indigo-500 py-4 rounded-xl font-bold text-white shadow-lg transition transform hover:scale-105">
                     🚀 GENERATE AI - NARASI LAPORAN
@@ -192,13 +214,14 @@
         <div class="mt-16 flex justify-end">
             <div class="sig-container">
                 <span id="out_lokasi_tgl1">..., ...</span><br>Penyusun,
-                <div class="h-24"></div>
-                <p class="font-bold inline-block border-b border-black" id="out_nama_sig1"></p>
+                <div class="h-24 flex items-center justify-center">
+                    <img id="out_ttd_img1" src="" class="img-ttd hidden">
+                </div>
+                <p class="font-bold uppercase inline-block border-b border-black" id="out_nama_sig1"></p>
             </div>
         </div>
         <div class="page-number">i</div>
     </div>
-
     <div class="page">
         <h2 class="text-center font-bold text-lg mb-10">DAFTAR ISI</h2>
         <div class="toc-list">
@@ -256,8 +279,12 @@
         <div class="flex justify-end">
             <div class="sig-container">
                 <span id="out_lokasi_tgl2">..., ...</span><br>Penyuluh Pertanian,
-                <div class="h-28"></div>
-                <p class="font-bold inline-block border-b border-black" id="out_nama_sig2"></p><br>
+                <div class="h-24 relative flex items-center justify-center">
+            <img id="out_ttd_img2" src="" class="img-ttd hidden">
+        </div>
+        
+        <p class="font-bold uppercase inline-block border-b border-black" id="out_nama_sig2" style="position: relative; z-index: 5;"></p>
+        <br>
                 NIP. <span id="out_nip_sig2">-</span>
             </div>
         </div>
@@ -333,6 +360,20 @@
         sync();
     }
 
+function handleTTD(input) {
+        const img1 = document.getElementById('out_ttd_img1');
+        const img2 = document.getElementById('out_ttd_img2');
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                img1.src = e.target.result;
+                img2.src = e.target.result;
+                img1.classList.remove('hidden');
+                img2.classList.remove('hidden');
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
     function toggle(no) {
         const is = document.getElementById(`chk_${no}`).checked;
         document.getElementById(`box_${no}`).style.display = is ? 'block' : 'none';
@@ -392,10 +433,10 @@ window.onload = () => {
         
         document.getElementById('out_bulan_2').innerText = blRapi; 
 
-        const tglTeks = formatTanggalIndo(val('in_tanggal'));
-        document.getElementById('out_lokasi_tgl1').innerText = `${b}, ${tglTeks}`;
-        document.getElementById('out_lokasi_tgl2').innerText = `${b}, ${tglTeks}`;
-    }
+         const tglTeks = formatTanggalIndo(val('in_tanggal'));
+    document.getElementById('out_lokasi_tgl1').innerText = `${b}, ${tglTeks}`;
+    document.getElementById('out_lokasi_tgl2').innerText = `${b}, ${tglTeks}`;
+}
 
     async function generateAI() {
         const apiKey = "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"; 
