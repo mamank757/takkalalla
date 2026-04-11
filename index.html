@@ -11,18 +11,26 @@
         
         body { background: #0f172a; color: #f1f5f9; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
         
-        .page {
-            background: white; width: 210mm; min-height: 297mm;
-            padding: 20mm 20mm; margin: 20px auto; color: black;
-            font-family: 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.5;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5); position: relative;
-            box-sizing: border-box; overflow: hidden;
-        }
+       .page {
+    background: white; 
+    width: 215mm; /* Ubah dari 210mm ke 215mm */
+    min-height: 330mm; /* Ubah dari 297mm ke 330mm */
+    padding: 20mm 20mm; 
+    margin: 20px auto; 
+    color: black;
+    font-family: 'Times New Roman', Times, serif; 
+    font-size: 11pt; 
+    line-height: 1.5;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5); 
+    position: relative;
+    box-sizing: border-box; 
+    overflow: hidden;
+}
 
         .page-number { position: absolute; bottom: 10mm; left: 50%; transform: translateX(-50%); font-size: 10pt; }
         
         /* Pengaturan Tabel - Optimasi Kolom */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 5.5pt; table-layout: fixed; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 6pt; table-layout: fixed; }
         th, td { 
             border: 1px solid black; 
             padding: 6px 4px; 
@@ -70,12 +78,21 @@
     mix-blend-mode: multiply; /* Membuat background putih pada TTD jadi transparan */
 }
 
-        @media print {
-            @page { size: A4; margin: 0; }
-            .no-print { display: none !important; }
-            body { background: white; padding: 0; }
-            .page { margin: 0; box-shadow: none; width: 210mm; height: 297mm; page-break-after: always; }
-        }
+       @media print {
+    @page { 
+        size: 215mm 330mm; /* Ukuran presisi F4 */
+        margin: 0; 
+    }
+    .no-print { display: none !important; }
+    body { background: white; padding: 0; }
+    .page { 
+        margin: 0; 
+        box-shadow: none; 
+        width: 215mm; 
+        height: 330mm; 
+        page-break-after: always; 
+    }
+}
 
         .report-container { width: 100%; max-width: 80rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; padding: 0 1rem; }
 
