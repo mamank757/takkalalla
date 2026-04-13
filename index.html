@@ -11,25 +11,24 @@
         
         body { background: #0f172a; color: #f1f5f9; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
         
-       .page {
-    background: white; 
-    width: 215mm; /* Ubah dari 210mm ke 215mm */
-    min-height: 330mm; /* Ubah dari 297mm ke 330mm */
-    padding: 20mm 20mm; 
-    margin: 20px auto; 
-    color: black;
-    font-family: 'Times New Roman', Times, serif; 
-    font-size: 11pt; 
-    line-height: 1.5;
-    box-shadow: 0 0 40px rgba(0,0,0,0.5); 
-    position: relative;
-    box-sizing: border-box; 
-    overflow: hidden;
-}
+        .page {
+            background: white; 
+            width: 215mm; 
+            min-height: 330mm; 
+            padding: 20mm 20mm; 
+            margin: 20px auto; 
+            color: black;
+            font-family: 'Times New Roman', Times, serif; 
+            font-size: 11pt; 
+            line-height: 1.5;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5); 
+            position: relative;
+            box-sizing: border-box; 
+            overflow: hidden;
+        }
 
         .page-number { position: absolute; bottom: 10mm; left: 50%; transform: translateX(-50%); font-size: 10pt; }
         
-        /* Pengaturan Tabel - Optimasi Kolom */
         table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 6pt; table-layout: fixed; }
         th, td { 
             border: 1px solid black; 
@@ -40,7 +39,6 @@
         }
         th { background-color: #f3f4f6; font-weight: bold; text-align: center; text-transform: uppercase; }
 
-        /* Style Daftar Isi */
         .toc-list { list-style: none; padding: 0; width: 100%; }
         .toc-item { display: flex; align-items: flex-end; margin-bottom: 8px; width: 100%; }
         .toc-title { flex-shrink: 0; padding-right: 5px; background: white; position: relative; z-index: 1; }
@@ -48,7 +46,6 @@
         .toc-page { flex-shrink: 0; padding-left: 5px; background: white; position: relative; z-index: 1; min-width: 25px; text-align: right; }
         .indent-1 { padding-left: 25px; }
 
-        /* UI Controls */
         .no-print-area { background: #1e293b; border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 1px solid #334155; }
         .input-card { background: #334155; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 5px solid #475569; transition: 0.3s; }
         .input-card.active { border-left-color: #10b981; background: #1e293b; }
@@ -57,42 +54,41 @@
         input, select { width: 100%; background: #0f172a; border: 1px solid #475569; color: white; padding: 8px; border-radius: 6px; margin-top: 8px; }
         .hidden-input { display: none; }
 
-       /* Container dibuat relative agar posisi absolute gambar mengacu ke sini */
-.sig-container { 
-    display: inline-block; 
-    min-width: 250px; 
-    text-align: center; 
-    position: relative; /* Penting! */
-    margin-top: 10px;
-}
+        .sig-container { 
+            display: inline-block; 
+            min-width: 250px; 
+            text-align: center; 
+            position: relative; 
+            margin-top: 10px;
+        }
 
-.img-ttd { 
-    position: absolute; /* Membuat gambar bisa melayang di atas teks */
-    left: 50%;
-    bottom: -5px; /* Jarak dari bawah (atur agar menyentuh nama) */
-    transform: translateX(-50%); /* Agar posisi horizontal tepat di tengah */
-    max-height: 120px; /* Ukuran diperbesar dari 80px ke 120px */
-    width: auto;
-    z-index: 10; /* Memastikan gambar berada di lapisan paling atas */
-    pointer-events: none; /* Agar tidak mengganggu klik pada teks jika perlu */
-    mix-blend-mode: multiply; /* Membuat background putih pada TTD jadi transparan */
-}
+        .img-ttd { 
+            position: absolute; 
+            left: 50%;
+            bottom: -5px; 
+            transform: translateX(-50%); 
+            max-height: 120px; 
+            width: auto;
+            z-index: 10; 
+            pointer-events: none; 
+            mix-blend-mode: multiply; 
+        }
 
-       @media print {
-    @page { 
-        size: 215mm 330mm; /* Ukuran presisi F4 */
-        margin: 0; 
-    }
-    .no-print { display: none !important; }
-    body { background: white; padding: 0; }
-    .page { 
-        margin: 0; 
-        box-shadow: none; 
-        width: 215mm; 
-        height: 330mm; 
-        page-break-after: always; 
-    }
-}
+        @media print {
+            @page { 
+                size: 215mm 330mm; 
+                margin: 0; 
+            }
+            .no-print { display: none !important; }
+            body { background: white; padding: 0; }
+            .page { 
+                margin: 0; 
+                box-shadow: none; 
+                width: 215mm; 
+                height: 330mm; 
+                page-break-after: always; 
+            }
+        }
 
         .report-container { width: 100%; max-width: 80rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; padding: 0 1rem; }
 
@@ -103,42 +99,42 @@
 </head>
 <body>
 <div id="browser-warning" class="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/90 backdrop-blur-md no-print p-4">
-    <div class="bg-slate-800 p-6 sm:p-8 rounded-3xl border border-emerald-500/50 max-w-sm w-full text-center shadow-2xl ring-1 ring-white/10">
+    <div class="bg-slate-800 p-6 sm:p-8 rounded-3xl border border-emerald-500/50 max-w-md w-full max-h-[90vh] overflow-y-auto text-center shadow-2xl ring-1 ring-white/10 custom-scrollbar">
         
-        <div class="text-emerald-400 text-5xl mb-4 animate-bounce-slow">
-            <i class="fa-solid fa-circle-exclamation"></i>
+       <h3 class="text-xl font-bold text-white mb-3">Informasi Penggunaan</h3>
+        <div class="mb-4">
+            <img src="https://github.com/mamank757/laporanbola/blob/d0a50483d98999dce2a925f3e93d627168c2e360/ChatGPT%20Image%2030%20Mar%202026,%2002.51.28.png?raw=true" 
+                 alt="Panduan" 
+                 class="w-full max-h-40 object-contain rounded-2xl border border-white/10 shadow-lg bg-slate-900">
         </div>
+
         
-        <h3 class="text-xl font-bold text-white mb-3">Informasi Penggunaan</h3>
         
         <div class="text-slate-300 mb-8 text-sm leading-relaxed space-y-3">
-            <p>
-                Untuk hasil cetak laporan yang optimal, gunakan <b>HP Android</b> atau <b>Laptop</b> dengan browser <b>Google Chrome</b>.
+            <p>Gunakan dgn bijak <b>Generating</b> laporan SKP Format Sulsel dari <b>Mamank.</b> Follow TikTok saya: <b>King Mamank</b>.</p>
+            <p class="bg-emerald-500/10 p-4 rounded-xl border border-emerald-500/30 text-sm md:text-base text-emerald-50 text-left">
+                <i class="fa-solid fa-robot mr-2 text-emerald-400"></i> 
+                <b class="text-white"></b> Utk hasil cetak laporan yang optimal, gunakan <b>HP Android</b> atau <b>Laptop</b> dengan browser <b>Google Chrome.</b> Jika Generating AI</b> gagal karena trafik padat. Silakan coba lagi beberapa saat, <b>jangan</b> <i>refresh</i> halaman.
             </p>
-            <p class="bg-emerald-500/10 p-4 rounded-xl border border-emerald-500/30 text-sm md:text-base text-emerald-50">
-    <i class="fa-solid fa-robot mr-2 text-emerald-400"></i> 
-    <b class="text-white">Generating AI</b> kadang gagal karena padatnya trafik. 
-    Coba lagi beberapa saat, <b>jangan</b> <i>refresh</i> halaman.
-</p>
         </div>
-        
+
         <button onclick="closeWarning()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-2xl transition-all duration-300 active:scale-95 shadow-lg shadow-emerald-900/20">
             SAYA MENGERTI
         </button>
     </div>
 </div>
+
 <div class="no-print max-w-7xl mx-auto p-4">
     <div class="no-print-area shadow-2xl border-t-4 border-emerald-500">
         <h2 class="text-2xl font-bold text-emerald-400 mb-6 flex items-center gap-3">
-            <i class="fa-solid fa-file-invoice"></i> PPL TAKKALALLA REPORT GENERATOR - 16 POIN IKI
+            <i class="fa-solid fa-file-invoice"></i> PPL TAKKALALLA REPORT GENERATOR (GEMINI AI)
         </h2>
         
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
             <div class="lg:col-span-1 flex flex-col gap-3"> 
                 <label class="text-xs font-bold text-slate-400 uppercase mb-1">Data Penyuluh</label>
-                
                 <select id="in_nama" onchange="updateIdentitas()">
-                    <option value="">-- Pilih Nama Penyuluh --</option>
+                     <option value="">-- Pilih Nama Penyuluh --</option>
                     <option>Guspiani Ibnur, S.Pt., M.Si.</option>
                     <option>Syamsyahrir Arsyad, S.TP., M.T.P</option>
                     <option>Muh. Fadly, S.ST.</option>
@@ -147,9 +143,7 @@
                     <option>Baskar</option>
                     <option>Besse Samri Sam</option>
                     </select>
-
-                <input type="text" id="in_nip" oninput="sync()" placeholder="NIP akan terisi otomatis">
-                
+                <input type="text" id="in_nip" oninput="sync()" placeholder="NIP">
                 <select id="in_jabatan" onchange="sync()">
                     <option value="">-- Pilih Jabatan --</option>
                     <option value="Penyuluh Pertanian Pemula">Penyuluh Pertanian Pemula</option>
@@ -161,11 +155,9 @@
                     <option value="Penyuluh Pertanian Ahli Madya">Penyuluh Pertanian Ahli Madya</option>
                     <option value="Penyuluh Pertanian Ahli Utama">Penyuluh Pertanian Ahli Utama</option>
                 </select>
-
-                <input type="text" id="in_wkpp" oninput="sync()" placeholder="WKPP akan terisi otomatis">
+                <input type="text" id="in_wkpp" oninput="sync()" placeholder="WKPP">
                 <input type="text" id="in_kab" oninput="sync()" value="Wajo">
-                <input type="text" id="in_bpp" oninput="sync()"value="Takkalalla">
-                
+                <input type="text" id="in_bpp" oninput="sync()" value="Bola">
                 <select id="in_bulan" onchange="sync()">
                     <option value="JANUARI">Januari</option>
                     <option value="FEBRUARI">Februari</option>
@@ -180,23 +172,20 @@
                     <option value="NOVEMBER">November</option>
                     <option value="DESEMBER">Desember</option>
                 </select>
-
-                 <label class="text-xs font-bold text-slate-400 uppercase -mb-2">Tanggal Laporan (TTD)</label>
+                <label class="text-xs font-bold text-slate-400 uppercase -mb-2">Tanggal TTD</label>
                 <input type="date" id="in_tanggal" oninput="sync()">
-
-                <label class="text-xs font-bold text-emerald-400 uppercase -mb-2 mt-2">Upload Tanda Tangan (PNG)</label>
-                <input type="file" id="in_ttd" accept="image/*" onchange="handleTTD(this)" class="text-xs file:bg-emerald-600 file:border-none file:text-white file:rounded file:px-2 file:py-1">
+                <label class="text-xs font-bold text-emerald-400 uppercase -mb-2 mt-2">Upload TTD (PNG)</label>
+                <input type="file" id="in_ttd" accept="image/*" onchange="handleTTD(this)" class="text-xs">
                 
                 <button onclick="generateAI()" id="btn-ai" class="mt-4 w-full bg-indigo-600 hover:bg-indigo-500 py-4 rounded-xl font-bold text-white shadow-lg transition transform hover:scale-105">
-                    🚀 GENERATE AI - NARASI LAPORAN
+                    🚀 GENERATE AI (GEMINI)
                 </button>
                 <button onclick="window.print()" class="w-full bg-emerald-600 hover:bg-emerald-700 py-3 rounded-xl font-bold transition text-white">
-                    <i class="fa-solid fa-print mr-2"></i> CETAK/SIMPAN LAPORAN
+                    <i class="fa-solid fa-print mr-2"></i> PRINT LAPORAN
                 </button>
             </div>
-
             <div class="lg:col-span-3">
-                <label class="text-xs font-bold text-slate-400 uppercase mb-3 block">Pilih Item Kegiatan & Isi Kendala Manual:</label>
+                <label class="text-xs font-bold text-slate-400 uppercase mb-3 block">Pilih Item Kegiatan:</label>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[600px] overflow-y-auto pr-2" id="input_container"></div>
             </div>
         </div>
@@ -222,7 +211,12 @@
                 <div class="grid grid-cols-3"><span>BPP WILAYAH</span><span class="col-span-2">: <span id="out_bpp_cover">-</span></span></div>
             </div>
         </div>
-        <div class="font-bold mt-10"><p>KEMENTERIAN PERTANIAN</p><p>BADAN PENYULUHAN DAN PENGEMBANGAN SDM PERTANIAN</p><p>PUSAT PENYULUHAN PERTANIAN</p><p class="mt-4">2026</p></div>
+        <div class="font-bold mt-10">
+            <p>KEMENTERIAN PERTANIAN</p>
+            <p>BADAN PENYULUHAN DAN PENGEMBANGAN SDM PERTANIAN</p>
+            <p>PUSAT PENYULUHAN PERTANIAN</p>
+            <p class="mt-4">2026</p>
+        </div>
     </div>
 
     <div class="page">
@@ -239,6 +233,7 @@
         </div>
         <div class="page-number">i</div>
     </div>
+
     <div class="page">
         <h2 class="text-center font-bold text-lg mb-10">DAFTAR ISI</h2>
         <div class="toc-list">
@@ -297,12 +292,10 @@
             <div class="sig-container">
                 <span id="out_lokasi_tgl2">..., ...</span><br>Penyuluh Pertanian,
                 <div class="h-24 relative flex items-center justify-center">
-            <img id="out_ttd_img2" src="" class="img-ttd hidden">
-        </div>
-        
-        <p class="font-bold uppercase inline-block border-b border-black" id="out_nama_sig2" style="position: relative; z-index: 5;"></p>
-        <br>
-                NIP. <span id="out_nip_sig2">-</span>
+                    <img id="out_ttd_img2" src="" class="img-ttd hidden">
+                </div>
+                <p class="font-bold uppercase inline-block border-b border-black" id="out_nama_sig2" style="position: relative; z-index: 5;"></p>
+                <br>NIP. <span id="out_nip_sig2">-</span>
             </div>
         </div>
         <div class="page-number">3</div>
@@ -310,7 +303,7 @@
 </div>
 
 <script>
-    const dataPenyuluh = {
+     const dataPenyuluh = {
         "Guspiani Ibnur, S.Pt., M.Si.": { nip: "198408182009022011", wilayah: "Kecamatan Takkalalla" },
         "Syamsyahrir Arsyad, S.TP., M.T.P": { nip: "199005052015021001", wilayah: "Desa Lamarua & Kel. Peneki" },
         "Muh. Fadly, S.ST.": { nip: "199003032011011001", wilayah: "Desa Lagoari & Desa Leweng" },
@@ -320,40 +313,24 @@
         "Besse Samri Sam": { nip: "197212312021212019", wilayah: "Desa Ajuraja & Desa Manyili" },
          };
 
-    function updateIdentitas() {
-        const select = document.getElementById('in_nama');
-        const data = dataPenyuluh[select.value];
-        if (data) {
-            document.getElementById('in_nip').value = data.nip;
-            document.getElementById('in_wkpp').value = data.wilayah;
-            sync();
-        }
-    }
-
     const daftarKomponen = [
         "Jumlah Laporan Luas Tambah Tanam (Padi, Jagung, Kedelai)",
         "Persentase Pendampingan Produksi Hortikultura (Cabai, Bawang Merah/Putih)",
-        "Persentase Pendampingan Hilirisasi Perkebunan (Tebu, Kelapa, Kopi, Kakao, Lada, Pala, Sagu)",
-        "Persentase Pendampingan Penyediaan Benih/Bibit & Produksi Ternak (Sapi, Kambing, Babi, Unggas)",
-        "Persentase Pendampingan Pemanfaatan Alat dan Mesin Pertanian",
+        "Persentase Pendampingan Hilirisasi Perkebunan",
+        "Persentase Pendampingan Produksi Ternak",
+        "Persentase Pendampingan Alat dan Mesin Pertanian",
         "Persentase Pendampingan RDKK Pupuk Subsidi",
         "Persentase Pendampingan Survey Lokasi Cetak Sawah Rakyat (CSR)",
-        "Persentase Pendampingan Pemanfaatan Irigasi Perpompaan Dan Perpipaan",
-        "Persentase Penderasan Materi Informasi Pertanian & Kelompencapir Digital",
-        "Persentase Pendampingan Kinerja Brigade Pangan (BP)",
-        "Persentase Pengawalan dan Pendampingan CPCL Bantuan Pemerintah",
-        "Persentase Verifikasi dan Validasi Distribusi Pupuk Subsidi",
-        "Persentase Pelaksanaan Tugas Fungsi Penyuluhan Pertanian",
-        "Jumlah Data Statistik Pertanian Hortikultura",
-        "Jumlah Laporan Data Statistik Tanaman Pangan",
-        "Jumlah Laporan Data Statistik Perkebunan"
+        "Persentase Pendampingan Irigasi Perpompaan",
+        "Persentase Materi Informasi Pertanian",
+        "Persentase Pendampingan Kinerja Brigade Pangan",
+        "Persentase Pengawalan CPCL Bantuan Pemerintah",
+        "Persentase Verifikasi Distribusi Pupuk Subsidi",
+        "Persentase Tugas Fungsi Penyuluhan Pertanian",
+        "Jumlah Data Statistik Hortikultura",
+        "Jumlah Laporan Statistik Tanaman Pangan",
+        "Jumlah Laporan Statistik Perkebunan"
     ];
-
-    function formatTanggalIndo(dateString) {
-        if (!dateString) return "...";
-        const date = new Date(dateString);
-        return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-    }
 
     function init() {
         const cont = document.getElementById('input_container');
@@ -367,9 +344,9 @@
                         <label for="chk_${no}" class="font-normal text-sm text-slate-200 cursor-pointer">${no}. ${k}</label>
                     </div>
                     <div id="box_${no}" class="hidden-input space-y-2">
-                        <textarea id="key_${no}" placeholder="Detail aktivitas, objek/komoditi diperjelas: Cth. Monitoring luas tambah tanam padi Poktan Sukamaju"></textarea>
-                        <textarea id="ken_${no}" placeholder="Tulis kendala (Wajib manual): Cth. Curah hujan yang sangat rendah, serangan hama tikus yang masif" class="bg-red-900/20 border-red-500/50"></textarea>
-                        <input type="text" id="ev_${no}" class="text-xs" placeholder="Link G-Drive Eviden">
+                        <textarea id="key_${no}" placeholder="Detail aktivitas..."></textarea>
+                        <textarea id="ken_${no}" placeholder="Kendala manual (opsional)..." class="bg-red-900/20"></textarea>
+                        <input type="text" id="ev_${no}" class="text-xs" placeholder="Link Eviden">
                     </div>
                 </div>`;
         });
@@ -377,20 +354,16 @@
         sync();
     }
 
-function handleTTD(input) {
-        const img1 = document.getElementById('out_ttd_img1');
-        const img2 = document.getElementById('out_ttd_img2');
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                img1.src = e.target.result;
-                img2.src = e.target.result;
-                img1.classList.remove('hidden');
-                img2.classList.remove('hidden');
-            };
-            reader.readAsDataURL(input.files[0]);
+    function updateIdentitas() {
+        const select = document.getElementById('in_nama');
+        const data = dataPenyuluh[select.value];
+        if (data) {
+            document.getElementById('in_nip').value = data.nip;
+            document.getElementById('in_wkpp').value = data.wilayah;
+            sync();
         }
     }
+
     function toggle(no) {
         const is = document.getElementById(`chk_${no}`).checked;
         document.getElementById(`box_${no}`).style.display = is ? 'block' : 'none';
@@ -405,86 +378,77 @@ function handleTTD(input) {
         daftarKomponen.forEach((k, i) => {
             const no = i + 1;
             if(document.getElementById(`chk_${no}`).checked) {
-                tb.innerHTML += `<tr><td align="center">${c++}</td><td class="font-normal">${k}</td><td id="r_${no}">...</td><td id="k_${no}" align="center">-</td><td id="t_${no}" align="center">-</td></tr>`;
+                tb.innerHTML += `<tr><td align="center">${c++}</td><td>${k}</td><td id="r_${no}">...</td><td id="k_${no}">-</td><td id="t_${no}">-</td></tr>`;
             }
         });
     }
-// Fungsi untuk menutup peringatan
-function closeWarning() {
-    document.getElementById('browser-warning').style.display = 'none';
-    // Opsional: Simpan ke localStorage agar tidak muncul lagi setelah refresh
-    localStorage.setItem('warningSeen', 'true');
-}
 
-// Tambahkan pengecekan ini di dalam fungsi init() atau window.onload
-function checkFirstVisit() {
-    const hasSeen = localStorage.getItem('warningSeen');
-    if (hasSeen) {
-        document.getElementById('browser-warning').style.display = 'none';
-    }
-}
-
-// Update window.onload Anda menjadi:
-window.onload = () => {
-    init();
-    checkFirstVisit();
-};
     function sync() {
         const val = (id) => document.getElementById(id).value;
         const n = val('in_nama'); 
         const nip = val('in_nip'); 
         const b = val('in_bpp'); 
-        let blRaw = val('in_bulan');
-        const blRapi = blRaw.charAt(0).toUpperCase() + blRaw.slice(1).toLowerCase();
-
+        const bl = val('in_bulan');
+        
         document.getElementById('out_nama_cover').innerText = n || "-";
         document.getElementById('out_nip_cover').innerText = nip || "-";
-        document.getElementById('out_jabatan_cover').innerText = (val('in_jabatan') || "PENYULUH PERTANIAN").toUpperCase();
+        document.getElementById('out_jabatan_cover').innerText = (val('in_jabatan') || "PENYULUH").toUpperCase();
         document.getElementById('out_wkpp_cover').innerText = (val('in_wkpp') || "-").toUpperCase();
         document.getElementById('out_bpp_cover').innerText = (b || "-").toUpperCase();
-        document.getElementById('out_bulan_cover').innerText = `BULAN ${blRaw}`;
-        
+        document.getElementById('out_bulan_cover').innerText = `BULAN ${bl}`;
         document.getElementById('out_nama_sig1').innerText = n;
         document.getElementById('out_nama_sig2').innerText = n;
         document.getElementById('out_nip_sig2').innerText = nip;
+        document.getElementById('out_bulan_2').innerText = bl;
         
-        document.getElementById('out_bulan_2').innerText = blRapi; 
+        const tgl = new Date(val('in_tanggal')).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
+        document.getElementById('out_lokasi_tgl1').innerText = `${b}, ${tgl}`;
+        document.getElementById('out_lokasi_tgl2').innerText = `${b}, ${tgl}`;
+    }
 
-         const tglTeks = formatTanggalIndo(val('in_tanggal'));
-    document.getElementById('out_lokasi_tgl1').innerText = `${b}, ${tglTeks}`;
-    document.getElementById('out_lokasi_tgl2').innerText = `${b}, ${tglTeks}`;
-}
+    function handleTTD(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('out_ttd_img1').src = e.target.result;
+                document.getElementById('out_ttd_img2').src = e.target.result;
+                document.getElementById('out_ttd_img1').classList.remove('hidden');
+                document.getElementById('out_ttd_img2').classList.remove('hidden');
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
-    async function generateAI() {
-        const apiKey = "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"; 
-        const btn = document.getElementById('btn-ai');
-        let sel = [];
-        
-        daftarKomponen.forEach((k, i) => {
-            const no = i + 1;
-            if(document.getElementById(`chk_${no}`).checked) {
-                sel.push({ 
-                    no, 
-                    nama: k, 
-                    detail: document.getElementById(`key_${no}`).value, 
-                    user_kendala: document.getElementById(`ken_${no}`).value, 
-                    link: document.getElementById(`ev_${no}`).value 
-                });
-            }
-        });
+    function closeWarning() { document.getElementById('browser-warning').style.display = 'none'; }
 
-        if(sel.length === 0) return alert("Pilih minimal satu kegiatan!");
-        btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Processing..."; 
-        btn.disabled = true;
+  async function generateAI() {
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyzqMWMdfvuizGXe-8huIwDbPc1uHlVb9uJEMfT1-Uc93xEaji-WJbtJj9w91A1HZoO/exec"; 
+    const btn = document.getElementById('btn-ai');
+    let sel = [];
+    
+    // Ambil data kegiatan yang dicentang
+    daftarKomponen.forEach((k, i) => {
+        const no = i + 1;
+        if(document.getElementById(`chk_${no}`).checked) {
+            sel.push({ 
+                no, 
+                nama: k, 
+                detail: document.getElementById(`key_${no}`).value, 
+                user_kendala: document.getElementById(`ken_${no}`).value, 
+                link: document.getElementById(`ev_${no}`).value 
+            });
+        }
+    });
 
-        try {
-            const prompt = `Anda adalah PPL Pertanian Profesional. Tugas Anda: Menyusun laporan bulanan formal standar Kementerian Pertanian. 
+    if(sel.length === 0) return alert("Pilih minimal satu kegiatan!");
+    
+    btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> AI Berpikir (tunggu beberapa detik untuk selesai)"; 
+    btn.disabled = true;
 
-Data Utama: ${JSON.stringify(sel)}
-Lokasi: BPP ${document.getElementById('in_bpp').value}, Kab: ${document.getElementById('in_kab').value}.
-Periode: ${document.getElementById('in_bulan').value} 2026.
-
-Aturan Penulisan:
+    // Susun instruksi laporan
+    const promptInstruksi = `Anda adalah PPL Pertanian Profesional. Tugas Anda: Menyusun laporan bulanan formal standar Kementerian Pertanian. Buat laporan dalam format JSON. 
+    Data: ${JSON.stringify(sel)}. Lokasi: BPP ${document.getElementById('in_bpp').value}.
+    Aturan Penulisan:
 1. Bahasa: Gunakan Bahasa Indonesia formal, teknis, dan objektif.
 2. 'kp' (Kata Pengantar):
 - Wajib terdiri dari 3 paragraf TERPISAH (dipisahkan dengan newline \n\n).
@@ -510,37 +474,52 @@ Struktur isi:
 - Paragraf 2 (Evaluasi Kendala):
   Menguraikan kendala yang dihadapi di lapangan (teknis, cuaca, sarana prasarana, partisipasi petani, dll) serta dampaknya terhadap pelaksanaan kegiatan, strategi ke depan, serta harapan terhadap dukungan pemerintah,
 
-PENTING: Output wajib JSON murni tanpa teks pengantar apapun di luar bracket:
-{"kp":"", "latar":"", "tugas":"", "tujuan":"", "kesimp":"", "items":[{"no":1, "rincian":"", "kendala":"", "tindak":""}]}`;
+    Format JSON harus: {"kp":"", "latar":"", "tugas":"", "tujuan":"", "kesimp":"", "items":[{"no":1, "rincian":"", "kendala":"", "tindak":""}]}. 
+    Berikan hanya JSON murni tanpa kata-kata lain.`;
 
-            const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-                method: "POST",
-                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
-                body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages: [{ role: "user", content: prompt }], response_format: { type: "json_object" } })
-            });
-            const data = await res.json();
-            const obj = JSON.parse(data.choices[0].message.content);
+    try {
+        // Menggunakan URLSearchParams agar terbaca oleh e.parameter di GAS
+        // Atau tetap JSON tapi GAS harus diubah. Kita pakai cara paling kompatibel:
+        const response = await fetch(scriptURL + "?prompt=" + encodeURIComponent(promptInstruksi), {
+            method: "POST"
+        });
 
-            document.getElementById('out_kp').innerHTML = obj.kp.replace(/\n/g, '<br>');
-            document.getElementById('out_latar').innerHTML = obj.latar.replace(/\n/g, '<br>');
-            document.getElementById('out_tugas_pokok').innerHTML = obj.tugas.replace(/\n/g, '<br>');
-            document.getElementById('out_tujuan').innerHTML = obj.tujuan.replace(/\n/g, '<br>');
-            document.getElementById('out_kesimp').innerHTML = obj.kesimp.replace(/\n/g, '<br>');
+        const rawData = await response.json();
+        
+        // Google Gemini mengirim data di dalam candidates[0].content.parts[0].text
+        // Kita perlu memparsing teks tersebut menjadi JSON object
+        const aiText = rawData.candidates[0].content.parts[0].text.replace(/```json/g, "").replace(/```/g, "").trim();
+        const obj = JSON.parse(aiText);
 
-            obj.items.forEach(item => {
-                const rCell = document.getElementById(`r_${item.no}`);
-                const orig = sel.find(s => s.no == item.no);
-                if(rCell) {
-                    rCell.innerHTML = `<div><b>${item.rincian}</b></div>${orig.link ? `<div style="font-size:7pt; color:blue; margin-top:5px; border-top: 0.5px solid #eee;">Eviden: ${orig.link}</div>` : ""}`;
-                    document.getElementById(`k_${item.no}`).innerText = orig.user_kendala || item.kendala;
-                    document.getElementById(`t_${item.no}`).innerText = item.tindak;
-                }
-            });
-            document.querySelectorAll('.italic.text-gray-400').forEach(el => el.classList.remove('italic', 'text-gray-400'));
-            alert("✅ Narasi Laporan Berhasil Dibuat!");
-        } catch (e) { alert("Error: " + e.message); } 
-        finally { btn.innerHTML = "🚀 GENERATE NARASI LAPORAN"; btn.disabled = false; }
+        // Update ke Tampilan
+        document.getElementById('out_kp').innerHTML = obj.kp.replace(/\n/g, '<br>');
+        document.getElementById('out_latar').innerHTML = obj.latar;
+        document.getElementById('out_tugas_pokok').innerHTML = obj.tugas;
+        document.getElementById('out_tujuan').innerHTML = obj.tujuan;
+        document.getElementById('out_kesimp').innerHTML = obj.kesimp.replace(/\n/g, '<br>');
+
+        obj.items.forEach(item => {
+            const rCell = document.getElementById(`r_${item.no}`);
+            const orig = sel.find(s => s.no == item.no);
+            if(rCell) {
+                rCell.innerHTML = `<div><b>${item.rincian}</b></div>${orig.link ? `<div class="text-[7pt] text-blue-600 mt-1">Eviden: ${orig.link}</div>` : ""}`;
+                document.getElementById(`k_${item.no}`).innerText = orig.user_kendala || item.kendala;
+                document.getElementById(`t_${item.no}`).innerText = item.tindak;
+            }
+        });
+
+        document.querySelectorAll('.italic.text-gray-400').forEach(el => el.classList.remove('italic', 'text-gray-400'));
+        alert("✅ Laporan Berhasil Dibuat!");
+
+    } catch (e) { 
+        console.error(e);
+        alert("Kesalahan: " + e.message); 
+    } finally { 
+        btn.innerHTML = "🚀 GENERATE LAPORAN DENGAN AI"; 
+        btn.disabled = false; 
     }
+}
+
     window.onload = init;
 </script>
 </body>
