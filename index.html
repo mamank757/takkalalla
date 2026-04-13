@@ -422,33 +422,35 @@
     function closeWarning() { document.getElementById('browser-warning').style.display = 'none'; }
 
   async function generateAI() {
-    const scriptURL = "https://script.google.com/macros/s/AKfycbyzqMWMdfvuizGXe-8huIwDbPc1uHlVb9uJEMfT1-Uc93xEaji-WJbtJj9w91A1HZoO/exec"; 
-    const btn = document.getElementById('btn-ai');
-    let sel = [];
-    
-    // Ambil data kegiatan yang dicentang
-    daftarKomponen.forEach((k, i) => {
-        const no = i + 1;
-        if(document.getElementById(`chk_${no}`).checked) {
-            sel.push({ 
-                no, 
-                nama: k, 
-                detail: document.getElementById(`key_${no}`).value, 
-                user_kendala: document.getElementById(`ken_${no}`).value, 
-                link: document.getElementById(`ev_${no}`).value 
-            });
-        }
-    });
+        const apiKey = "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"; 
+        const btn = document.getElementById('btn-ai');
+        let sel = [];
+        
+        daftarKomponen.forEach((k, i) => {
+            const no = i + 1;
+            if(document.getElementById(`chk_${no}`).checked) {
+                sel.push({ 
+                    no, 
+                    nama: k, 
+                    detail: document.getElementById(`key_${no}`).value, 
+                    user_kendala: document.getElementById(`ken_${no}`).value, 
+                    link: document.getElementById(`ev_${no}`).value 
+                });
+            }
+        });
 
-    if(sel.length === 0) return alert("Pilih minimal satu kegiatan!");
-    
-    btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> AI Berpikir (tunggu beberapa detik untuk selesai)"; 
-    btn.disabled = true;
+        if(sel.length === 0) return alert("Pilih minimal satu kegiatan!");
+        btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Processing..."; 
+        btn.disabled = true;
 
-    // Susun instruksi laporan
-    const promptInstruksi = `Anda adalah PPL Pertanian Profesional. Tugas Anda: Menyusun laporan bulanan formal standar Kementerian Pertanian. Buat laporan dalam format JSON. 
-    Data: ${JSON.stringify(sel)}. Lokasi: BPP ${document.getElementById('in_bpp').value}.
-    Aturan Penulisan:
+        try {
+            const prompt = `Anda adalah PPL Pertanian Profesional. Tugas Anda: Menyusun laporan bulanan formal standar Kementerian Pertanian. 
+
+Data Utama: ${JSON.stringify(sel)}
+Lokasi: BPP ${document.getElementById('in_bpp').value}, Kab: ${document.getElementById('in_kab').value}.
+Periode: ${document.getElementById('in_bulan').value} 2026.
+
+Aturan Penulisan:
 1. Bahasa: Gunakan Bahasa Indonesia formal, teknis, dan objektif.
 2. 'kp' (Kata Pengantar):
 - Wajib terdiri dari 3 paragraf TERPISAH (dipisahkan dengan newline \n\n).
@@ -474,52 +476,37 @@ Struktur isi:
 - Paragraf 2 (Evaluasi Kendala):
   Menguraikan kendala yang dihadapi di lapangan (teknis, cuaca, sarana prasarana, partisipasi petani, dll) serta dampaknya terhadap pelaksanaan kegiatan, strategi ke depan, serta harapan terhadap dukungan pemerintah,
 
-    Format JSON harus: {"kp":"", "latar":"", "tugas":"", "tujuan":"", "kesimp":"", "items":[{"no":1, "rincian":"", "kendala":"", "tindak":""}]}. 
-    Berikan hanya JSON murni tanpa kata-kata lain.`;
+PENTING: Output wajib JSON murni tanpa teks pengantar apapun di luar bracket:
+{"kp":"", "latar":"", "tugas":"", "tujuan":"", "kesimp":"", "items":[{"no":1, "rincian":"", "kendala":"", "tindak":""}]}`;
 
-    try {
-        // Menggunakan URLSearchParams agar terbaca oleh e.parameter di GAS
-        // Atau tetap JSON tapi GAS harus diubah. Kita pakai cara paling kompatibel:
-        const response = await fetch(scriptURL + "?prompt=" + encodeURIComponent(promptInstruksi), {
-            method: "POST"
-        });
+            const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+                body: JSON.stringify({ model: "llama-3.3-70b-versatile", messages: [{ role: "user", content: prompt }], response_format: { type: "json_object" } })
+            });
+            const data = await res.json();
+            const obj = JSON.parse(data.choices[0].message.content);
 
-        const rawData = await response.json();
-        
-        // Google Gemini mengirim data di dalam candidates[0].content.parts[0].text
-        // Kita perlu memparsing teks tersebut menjadi JSON object
-        const aiText = rawData.candidates[0].content.parts[0].text.replace(/```json/g, "").replace(/```/g, "").trim();
-        const obj = JSON.parse(aiText);
+            document.getElementById('out_kp').innerHTML = obj.kp.replace(/\n/g, '<br>');
+            document.getElementById('out_latar').innerHTML = obj.latar.replace(/\n/g, '<br>');
+            document.getElementById('out_tugas_pokok').innerHTML = obj.tugas.replace(/\n/g, '<br>');
+            document.getElementById('out_tujuan').innerHTML = obj.tujuan.replace(/\n/g, '<br>');
+            document.getElementById('out_kesimp').innerHTML = obj.kesimp.replace(/\n/g, '<br>');
 
-        // Update ke Tampilan
-        document.getElementById('out_kp').innerHTML = obj.kp.replace(/\n/g, '<br>');
-        document.getElementById('out_latar').innerHTML = obj.latar;
-        document.getElementById('out_tugas_pokok').innerHTML = obj.tugas;
-        document.getElementById('out_tujuan').innerHTML = obj.tujuan;
-        document.getElementById('out_kesimp').innerHTML = obj.kesimp.replace(/\n/g, '<br>');
-
-        obj.items.forEach(item => {
-            const rCell = document.getElementById(`r_${item.no}`);
-            const orig = sel.find(s => s.no == item.no);
-            if(rCell) {
-                rCell.innerHTML = `<div><b>${item.rincian}</b></div>${orig.link ? `<div class="text-[7pt] text-blue-600 mt-1">Eviden: ${orig.link}</div>` : ""}`;
-                document.getElementById(`k_${item.no}`).innerText = orig.user_kendala || item.kendala;
-                document.getElementById(`t_${item.no}`).innerText = item.tindak;
-            }
-        });
-
-        document.querySelectorAll('.italic.text-gray-400').forEach(el => el.classList.remove('italic', 'text-gray-400'));
-        alert("✅ Laporan Berhasil Dibuat!");
-
-    } catch (e) { 
-        console.error(e);
-        alert("Kesalahan: " + e.message); 
-    } finally { 
-        btn.innerHTML = "🚀 GENERATE LAPORAN DENGAN AI"; 
-        btn.disabled = false; 
+            obj.items.forEach(item => {
+                const rCell = document.getElementById(`r_${item.no}`);
+                const orig = sel.find(s => s.no == item.no);
+                if(rCell) {
+                    rCell.innerHTML = `<div><b>${item.rincian}</b></div>${orig.link ? `<div style="font-size:7pt; color:blue; margin-top:5px; border-top: 0.5px solid #eee;">Eviden: ${orig.link}</div>` : ""}`;
+                    document.getElementById(`k_${item.no}`).innerText = orig.user_kendala || item.kendala;
+                    document.getElementById(`t_${item.no}`).innerText = item.tindak;
+                }
+            });
+            document.querySelectorAll('.italic.text-gray-400').forEach(el => el.classList.remove('italic', 'text-gray-400'));
+            alert("✅ Narasi Laporan Berhasil Dibuat!");
+        } catch (e) { alert("Error: " + e.message); } 
+        finally { btn.innerHTML = "🚀 GENERATE NARASI LAPORAN"; btn.disabled = false; }
     }
-}
-
     window.onload = init;
 </script>
 </body>
