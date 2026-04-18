@@ -453,20 +453,8 @@ function handleTTDKoor(input) {
     }
 }
 
-// Update fungsi sync() Anda untuk memasukkan data koordinator
-function sync() {
-    const val = (id) => document.getElementById(id).value;
-    
-    // ... kode sync yang sudah ada (nama penyuluh, nip, dll) ...
 
-    // Tambahan untuk Koordinator
-    document.getElementById('out_nama_koor').innerText = val('in_nama_koor') || 'NAMA KOORDINATOR';
-    document.getElementById('out_nip_koor').innerText = val('in_nip_koor') || '-';
     
-    // Jalankan kode sync penyuluh Bapak yang sudah ada di bawahnya...
-    // (Pastikan baris sync penyuluh Bapak tidak terhapus)
-}
-
 function applySmartBreak() {
     const container = document.querySelector('.report-container');
     const tableBody = document.getElementById('out_table_body');
@@ -591,6 +579,10 @@ window.onload = () => {
     const nip = val('in_nip'); 
     const b = val('in_bpp'); 
     let blRaw = val('in_bulan'); // Ini yang "JANUARI"
+    // Tambahan untuk Koordinator
+    document.getElementById('out_nama_koor').innerText = val('in_nama_koor') || 'NAMA KOORDINATOR';
+    document.getElementById('out_nip_koor').innerText = val('in_nip_koor') || '-';
+    
     
     // Proses mengubah "JANUARI" -> "Januari"
     const blRapi = blRaw.charAt(0).toUpperCase() + blRaw.slice(1).toLowerCase();
